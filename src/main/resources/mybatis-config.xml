@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <properties resource="jdbc.properties"/>
+    <typeAliases>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.Product" alias="Product"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.Stock" alias="Stock"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.DeliveryToStock" alias="DeliveryToStock"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.DeliveryToClient" alias="DeliveryToClient"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.Courier" alias="Courier"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.Client" alias="Client"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.CarForStock" alias="CarForStock"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.Box" alias="Box"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.ProductInTheBox" alias="ProductInTheBox"/>
+    </typeAliases>
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="static/ProductMapper.xml"/>
+        <mapper resource="static/StockMapper.xml"/>
+        <mapper resource="static/ClientMapper.xml"/>
+        <mapper resource="static/CourierMapper.xml"/>
+        <mapper resource="static/BoxMapper.xml"/>
+        <mapper resource="static/ProductInTheBoxMapper.xml"/>
+        <mapper resource="static/CarForStockMapper.xml"/>
+        <mapper resource="static/DeliveryToClientMapper.xml"/>
+        <mapper resource="static/DeliveryToStockMapper.xml"/>
+        <!--
+        <mapper resource="DeliveryToStockMapper.xml"/>
+
+        -->
+    </mappers>
+</configuration>

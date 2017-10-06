@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.DeliveryToClientMapper">
+
+    <resultMap type="DeliveryToClient" id="DeliveryToClient">
+        <id property="id" column="id"/>
+        <result property="boxId" column="box_id"/>
+        <result property="clientId" column="client_id"/>
+        <result property="courierId" column="courier_id"/>
+        <result property="quantityOfDeliveredToClient" column="quantity_of_delivered_to_client"/>
+        <result property="dateOfDelivery" column="date_of_delivery_to_client"/>
+        <result property="timeOfDelivery" column="time_of_delivery_to_client"/>
+    </resultMap>
+
+    <select id="getDeliveryToClientById" parameterType="long" resultMap="DeliveryToClient">
+        SELECT
+        id,
+        box_id ,
+        client_id,
+        courier_id ,
+        date_of_delivery_to_client,
+        time_of_delivery_to_client
+        FROM delivery_to_client
+        WHERE id = #{deliveryToClientId}
+    </select>
+
+    <select id="getDeliveryToClientsByBoxId" parameterType="long" resultMap="DeliveryToClient">
+        SELECT
+            id,
+        box_id ,
+        client_id,
+        courier_id ,
+        date_of_delivery_to_client,
+        time_of_delivery_to_client
+        FROM delivery_to_client
+        WHERE box_id = #{deliveryToClientBoxId}
+    </select>
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+
+
+    <select id="getDeliveryToClientsByClientId" parameterType="long" resultMap="DeliveryToClient">
+        SELECT
+        box_id ,
+        client_id,
+        courier_id ,
+        date_of_delivery_to_client,
+        time_of_delivery_to_client
+        FROM delivery_to_client
+        WHERE client_id = #{deliveryToClientClientId}
+    </select>
+
+    <select id="getDeliveryToClientsByCourierId" parameterType="long" resultMap="DeliveryToClient">
+        SELECT
+            id,
+        box_id ,
+        client_id,
+        courier_id ,
+        date_of_delivery_to_client,
+        time_of_delivery_to_client
+        FROM delivery_to_client
+        WHERE courier_id = #{deliveryToClientCourierId}
+    </select>
+
+    <select id="getAllDeliveryToClients"  resultMap="DeliveryToClient">
+        SELECT
+        id,
+        box_id ,
+        client_id,
+        courier_id ,
+        date_of_delivery_to_client,
+        time_of_delivery_to_client
+        FROM delivery_to_client
+    </select>
+
+    <insert id="insertDeliveryToClient" parameterType="DeliveryToClient" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO delivery_to_client ( box_id, client_id,courier_id,date_of_delivery_to_client,time_of_delivery_to_client)
+        VALUES( #{boxId},#{clientId} ,#{courierId},#{dateOfDelivery},#{timeOfDelivery})
+    </insert>
+
+    <update id="updateDeliveryToClient" parameterType="DeliveryToClient">
+        UPDATE delivery_to_client
+        SET
+        box_id = #{boxId},
+        client_id = #{clientId},
+        courier_id = #{courierId},
+        date_of_delivery_to_client=#{dateOfDelivery},
+        time_of_delivery_to_client=#{timeOfDelivery}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteDeliveryToClient" parameterType="long">
+        DELETE FROM delivery_to_client WHERE id = #{deliveryToClientId}
+    </delete>
+
+    <delete id="deleteDeliveryToClientsByBoxId" parameterType="long">
+        DELETE FROM delivery_to_client WHERE box_id=#{deliveryToClientBoxId}
+    </delete>
+
+    <delete id="deleteDeliveryToClientsByClientId" parameterType="long">
+        DELETE FROM delivery_to_client WHERE client_id=#{deliveryToClientClientId}
+    </delete>
+
+    <delete id="deleteDeliveryToClientsByCourierId" parameterType="long">
+        DELETE FROM delivery_to_client WHERE courier_id=#{deliveryToClientCourierId}
+    </delete>
+
+</mapper>

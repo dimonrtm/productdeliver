@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.CourierMapper">
+
+    <resultMap type="Courier" id="CourierResult">
+        <id property="id" column="id"/>
+        <result property="fname" column="fname_courier"/>
+        <result property="lname" column="lname_courier"/>
+        <result property="dob" column="dob"/>
+        <result property="phone" column="phone_courier"/>
+        <result property="markCar" column="mark_car"/>
+        <result property="modelCar" column="model_car"/>
+        <result property="releaseDateCar" column="release_date_car"/>
+    </resultMap>
+
+    <select id="getCourierById" parameterType="long" resultMap="CourierResult">
+        SELECT
+        id,
+        fname_courier,
+        lname_courier,
+        dob,
+        phone_courier,
+        mark_car,
+        model_car,
+        release_date_car
+        FROM courier
+        WHERE id = #{courierId}
+    </select>
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+
+
+    <select id="getAllCouriers" resultMap="CourierResult">
+        SELECT * FROM courier
+    </select>
+
+    <insert id="insertCourier" parameterType="Courier" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO courier (fname_courier, lname_courier, dob, phone_courier,mark_car,model_car,release_date_car)
+        VALUES(#{fname}, #{lname},#{dob} ,#{phone},#{markCar},#{modelCar},#{releaseDateCar})
+    </insert>
+
+    <update id="updateCourier" parameterType="Courier">
+        UPDATE courier
+        SET
+        fname_courier = #{fname},
+        lname_courier = #{lname},
+        dob = #{dob},
+        phone_courier=#{phone},
+        mark_car=#{markCar},
+        model_car=#{modelCar},
+        release_date_car=#{releaseDateCar}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteCourier" parameterType="long">
+        DELETE FROM courier WHERE id = #{courierId}
+    </delete>
+
+</mapper>

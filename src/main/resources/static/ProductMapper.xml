@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.ProductMapper">
+
+    <resultMap type="Product" id="ProductResult">
+        <id property="id" column="id"/>
+        <result property="name" column="product_name"/>
+        <result property="size" column="product_size"/>
+        <result property="weight" column="product_weight"/>
+        <result property="price" column="product_price"/>
+    </resultMap>
+
+    <select id="getProductById" parameterType="long" resultMap="ProductResult">
+        SELECT
+        id,
+        product_name,
+        product_size,
+       product_weight,
+        product_price
+        FROM product
+        WHERE id = #{productId}
+    </select>
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+
+
+    <select id="getAllProducts" resultMap="ProductResult">
+        SELECT * FROM product
+    </select>
+
+    <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO product (product_name, product_size, product_weight, product_price)
+        VALUES(#{name}, #{size},#{weight} ,#{price})
+    </insert>
+
+    <update id="updateProduct" parameterType="Product">
+        UPDATE product
+        SET
+        product_name = #{name},
+        product_price = #{price},
+        product_weight = #{weight},
+        product_size = #{size}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteProduct" parameterType="long">
+        DELETE FROM product WHERE id = #{productId}
+    </delete>
+
+</mapper>

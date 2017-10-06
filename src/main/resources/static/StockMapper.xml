@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.StockMapper">
+
+    <resultMap type="Stock" id="StockResult">
+        <id property="id" column="id"/>
+        <result property="stockAdress" column="stock_adress"/>
+    </resultMap>
+
+    <select id="getStockById" parameterType="long" resultMap="StockResult">
+        SELECT
+        id,
+        stock_adress
+        FROM stock
+        WHERE stock.id = #{stockId}
+    </select>
+
+
+
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+
+
+    <select id="getAllStocks" resultMap="StockResult">
+        SELECT
+            id,
+            stock_adress
+        FROM stock
+    </select>
+
+    <insert id="insertStock" parameterType="Stock" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO stock (stock_adress)
+        VALUES(#{stockAdress})
+    </insert>
+
+    <update id="updateStock" parameterType="Stock">
+        UPDATE stock
+        SET
+        stock_adress = #{stockAdress}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteStock" parameterType="long">
+        DELETE FROM stock WHERE id = #{stockId}
+    </delete>
+
+</mapper>

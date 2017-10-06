@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.ProductInTheBoxMapper">
+
+    <select id="getListProductInTheBoxByBoxId" parameterType="long" resultType="ru.omgtu.fitiks.practice.model.ProductInTheBox">
+        SELECT
+        product_id,
+        box_id
+        FROM products_in_the_box
+        WHERE box_id = #{boxId}
+    </select>
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+    <resultMap type="ProductInTheBox" id="ProductInTheBoxResult">
+        <id property="boxId" column="box_id"/>
+        <result property="productId" column="product_id"/>
+    </resultMap>
+
+
+    <insert id="insertProductInTheBox" parameterType="ProductInTheBox"  >
+        INSERT INTO products_in_the_box (product_id, box_id,quantity_product)
+        VALUES(#{productId}, #{boxId},#{quantityProduct})
+    </insert>
+
+
+    <delete id="deleteProductInTheBoxByBoxId" parameterType="long">
+        DELETE FROM products_in_the_box WHERE box_id = #{boxId}
+    </delete>
+
+    <delete id="deleteProductInTheBoxByProductId" parameterType="long">
+        DELETE FROM products_in_the_box WHERE product_id = #{productId}
+    </delete>
+
+</mapper>

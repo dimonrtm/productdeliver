@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.DeliveryToStockMapper">
+
+    <resultMap type="DeliveryToStock" id="DeliveryToStockResult">
+        <id property="id" column="id"/>
+        <result property="stockId" column="stock_id"/>
+        <result property="productId" column="product_id"/>
+        <result property="carForStockId" column="car_for_stock_id"/>
+        <result property="quantityOfDeliveredToStock" column="quantity_of_delivered_to_stock"/>
+        <result property="dateOfDelivery" column="date_of_delivery_to_stock"/>
+        <result property="timeOfDelivery" column="time_of_delivery_to_stock"/>
+    </resultMap>
+
+    <select id="getDeliveryToStockById" parameterType="long" resultMap="DeliveryToStockResult">
+        SELECT
+            id,
+        stock_id,
+        product_id,
+        car_for_stock_id,
+        quantity_of_delivered_to_stock,
+        date_of_delivery_to_stock,
+        time_of_delivery_to_stock
+        FROM delivery_to_stock
+        WHERE id = #{deliveryToStockId}
+    </select>
+    <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+    <select id="getDeliveryToStocksByStockId" parameterType="long" resultMap="DeliveryToStockResult">
+        SELECT
+        id,
+        stock_id,
+        car_for_stock_id,
+        quantity_of_delivered_to_stock,
+        date_of_delivery_to_stock,
+        time_of_delivery_to_stock
+        FROM delivery_to_stock
+        WHERE stock_id = #{deliveryToStockStockId}
+    </select>
+
+    <select id="getDeliveryToStocksByCarForStockId" parameterType="long" resultMap="DeliveryToStockResult">
+        SELECT
+        id,
+        stock_id,
+        car_for_stock_id,
+        quantity_of_delivered_to_stock,
+        date_of_delivery_to_stock,
+        time_of_delivery_to_stock
+        FROM delivery_to_stock
+        WHERE car_for_stock_id = #{deliveryToStockCarForStockId}
+    </select>
+
+    <select id="getDeliveryToStocksByProductId" parameterType="long" resultMap="DeliveryToStockResult">
+        SELECT
+        id,
+        stock_id,
+        car_for_stock_id,
+        quantity_of_delivered_to_stock,
+        date_of_delivery_to_stock,
+        time_of_delivery_to_stock
+        FROM delivery_to_stock
+        WHERE product_id = #{deliveryToStockProductId}
+    </select>
+
+    <select id="getAllDeliveryToStocks" resultMap="DeliveryToStockResult">
+        SELECT * FROM delivery_to_stock
+    </select>
+
+    <insert id="insertDeliveryToStock" parameterType="DeliveryToStock" useGeneratedKeys="true" keyProperty="id" >
+        INSERT INTO delivery_to_stock (stock_id, car_for_stock_id,product_id,quantity_of_delivered_to_stock,date_of_delivery_to_stock,time_of_delivery_to_stock)
+        VALUES(#{stockId},#{carForStockId}, #{productId},#{quantityOfDeliveredToStock},#{dateOfDelivery},#{timeOfDelivery})
+    </insert>
+
+    <update id="updateDeliveryToStock" parameterType="DeliveryToStock">
+        UPDATE delivery_to_stock
+        SET
+        stock_id = #{stockId},
+        product_id = #{productId},
+        car_for_stock_id = #{carForStockId},
+        quantity_of_delivered_to_stock=#{quantityOfDeliveredToStock},
+        date_of_delivery_to_stock=#{dateOfDelivery},
+        time_of_delivery_to_stock=#{timeOfDelivery}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteDeliveryToStock" parameterType="long">
+        DELETE FROM delivery_to_stock WHERE id = #{deliveryToStockId}
+    </delete>
+
+    <delete id="deleteDeliveryToStocksByCarForStockId" parameterType="long">
+        DELETE FROM delivery_to_stock WHERE car_for_stock_id=#{deliveryToStockCarForStockId}
+    </delete>
+
+    <delete id="deleteDeliveryToStocksByProductId" parameterType="long">
+        DELETE FROM delivery_to_stock WHERE product_id=#{deliveryToStockProductId}
+    </delete>
+
+    <delete id="deleteDeliveryToStocksByStockId" parameterType="long">
+        DELETE FROM delivery_to_stock WHERE stock_id=#{deliveryToStockStockId}
+    </delete>
+
+</mapper>
