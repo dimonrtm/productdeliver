@@ -20,6 +20,7 @@ class App extends Component {
   <Menu.Item name='клиент' active={activeItem === 'клиент'} onClick={this.handleItemClick} />
   <Menu.Item name='курьер' active={activeItem === 'курьер'} onClick={this.handleItemClick} />
   <Menu.Item name='склад' active={activeItem === 'склад'} onClick={this.handleItemClick} />
+  <Menu.Item name='админ' active={activeItem === 'админ'} onClick={this.handleItemClick} />
       </Menu>
       </Segment>
         </header>
