@@ -9,7 +9,7 @@ public class Box {
 
     private long id;
 
-    private String name;
+    private long clientId;
 
     List<ProductInTheBox> productsInTheBox;
 
@@ -25,15 +25,6 @@ public class Box {
         this.id = id;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public List<ProductInTheBox> getProductsInTheBox() {
         return productsInTheBox;
     }
@@ -42,4 +33,11 @@ public class Box {
         this.productsInTheBox = productsInTheBox;
     }
 
+    public long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
+    }
 }

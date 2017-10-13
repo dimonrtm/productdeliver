@@ -6,7 +6,7 @@
 
     <resultMap type="Box" id="BoxResult">
         <id property="id" column="b_id"/>
-        <result property="name" column="b_name"/>
+        <result property="clientId" column="b_client_id"/>
         <collection property="productsInTheBox" ofType="ProductInTheBox">
             <id property="productId" column="p_id"/>
             <result property="boxId" column="b_id"/>
@@ -17,7 +17,7 @@
     <select id="getBoxById" parameterType="long" resultMap="BoxResult">
         SELECT
             box.id AS b_id,
-            box.box_name AS b_name,
+            box.b_client_id AS b_client_id,
             products_in_the_box.product_id AS p_id,
             products_in_the_box.quantity_product AS p_quantity_product
         FROM box LEFT JOIN products_in_the_box ON box.id=products_in_the_box.box_id
@@ -26,40 +26,44 @@
     <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
 
 
-    <select id="getBoxByName" parameterType="String" resultMap="BoxResult">
+    <select id="getBoxByClientId" parameterType="long" resultMap="BoxResult">
         SELECT
             box.id AS b_id,
-            box.box_name AS b_name,
+            box.b_client_id AS b_client_id,
             products_in_the_box.product_id AS p_id,
             products_in_the_box.quantity_product AS p_quantity_product
         FROM box LEFT JOIN  products_in_the_box ON box.id=products_in_the_box.box_id
-        WHERE box.box_name=#{name}
+        WHERE box.b_client_id=#{clientId}
     </select>
 
     <select id="getAllBoxs" resultMap="BoxResult">
         SELECT
             box.id AS b_id,
-            box.box_name AS b_name,
+            box.b_client_id AS b_client_id,
             products_in_the_box.product_id AS p_id,
             products_in_the_box.quantity_product AS p_quantity_product
         FROM box INNER JOIN  products_in_the_box ON box.id=products_in_the_box.box_id
     </select>
 
     <insert id="insertBox" parameterType="Box" useGeneratedKeys="true" keyProperty="id">
-INSERT INTO box (box_name)
-VALUES(#{name})
+INSERT INTO box (b_client_id)
+VALUES(#{clientId})
     </insert>
 
 
     <update id="updateBox" parameterType="Box">
         UPDATE box
         SET
-        box_name=#{name}
+        b_client_id=#{clientId}
         WHERE id=#{id};
     </update>
 
     <delete id="deleteBox"  parameterType="long">
         DELETE FROM box WHERE id=#{boxId}
+    </delete>
+
+    <delete id="deleteBoxByClientId"  parameterType="long">
+        DELETE FROM box WHERE b_client_id=#{clientId}
     </delete>
 
 </mapper>

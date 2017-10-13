@@ -5,7 +5,7 @@ import {Menu,Segment} from 'semantic-ui-react';
 
 class App extends Component {
 
-    state = { activeItem: 'продукты' }
+    state = { activeItem: 'клиент' }
 
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -17,14 +17,9 @@ class App extends Component {
         <header className="App-header">
           <Segment inverted>
       <Menu inverted pointing secondary>
-      <Menu.Item name='продукты' active={activeItem === 'продукты'} onClick={this.handleItemClick} />
-  <Menu.Item name='клиенты' active={activeItem === 'клиенты'} onClick={this.handleItemClick} />
-  <Menu.Item name='курьеры' active={activeItem === 'курьеры'} onClick={this.handleItemClick} />
-  <Menu.Item name='склады' active={activeItem === 'склады'} onClick={this.handleItemClick} />
-  <Menu.Item name='машины-доставки' active={activeItem === 'машины-доставки'} onClick={this.handleItemClick} />
-  <Menu.Item name='пакеты-товаров' active={activeItem === 'пакеты-товаров'} onClick={this.handleItemClick} />
-      <Menu.Item name='доставки-клиентам' active={activeItem === 'доставки-клиентам'} onClick={this.handleItemClick} />
-  <Menu.Item name='доставки-на-склады' active={activeItem === 'доставки-на-склады'} onClick={this.handleItemClick} />
+  <Menu.Item name='клиент' active={activeItem === 'клиент'} onClick={this.handleItemClick} />
+  <Menu.Item name='курьер' active={activeItem === 'курьер'} onClick={this.handleItemClick} />
+  <Menu.Item name='склад' active={activeItem === 'склад'} onClick={this.handleItemClick} />
       </Menu>
       </Segment>
         </header>

@@ -46,9 +46,9 @@ public class BoxService {
         return boxDao.getBoxById(id);
     }
 
-    public Box getBoxByName(String name)
+    public Box getBoxByClientId(long clientId)
     {
-        return boxDao.getBoxByName(name);
+        return boxDao.getBoxByClientId(clientId);
     }
 
     public List<Box> getListBoxes()

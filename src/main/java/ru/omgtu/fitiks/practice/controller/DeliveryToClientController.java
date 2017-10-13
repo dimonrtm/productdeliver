@@ -30,12 +30,10 @@ public class DeliveryToClientController {
 
     @RequestMapping(value="/deliveryToClient",method= RequestMethod.POST)
     public String addDeliveryToClient(@RequestParam("boxId") long boxId,
-                                      @RequestParam("clientId") long clientId,
                                       @RequestParam("courierId") long courierId) throws IOException
     {
         DeliveryToClient deliveryToClient=new DeliveryToClient();
         deliveryToClient.setBoxId(boxId);
-        deliveryToClient.setClientId(clientId);
         deliveryToClient.setCourierId(courierId);
         Date date=Date.valueOf(LocalDate.now());
         deliveryToClient.setDateOfDelivery(date);
@@ -65,13 +63,6 @@ public class DeliveryToClientController {
         return new ObjectMapper().writeValueAsString(deliveryToClientService.getDeliveryToClientsByBoxId(boxId));
     }
 
-    @RequestMapping(value="/deliveryToClient/{clientId}",method=RequestMethod.GET)
-    public String getDeliveryToClientsByClientId(@PathVariable("clientId") long clientId) throws IOException
-    {
-
-        return new ObjectMapper().writeValueAsString(deliveryToClientService.getDeliveryToClientsByClientId(clientId));
-    }
-
     @RequestMapping(value="/deliveryToClient/{courierId}",method=RequestMethod.GET)
     public String getDeliveryToClientsByCourierId(@PathVariable("courierId") long courierId) throws IOException
     {
@@ -82,12 +73,10 @@ public class DeliveryToClientController {
     @RequestMapping(value="/deliveryToClient/{deliveryToClientId}",method=RequestMethod.PUT)
     public String updateDeliveryToClient(@PathVariable("deliveryToClientId") long deliveryToClientId,
                                          @RequestParam("boxId") long boxId,
-                                         @RequestParam("clientId") long clientId,
                                          @RequestParam("courierId") long courierId) throws IOException
     {
         DeliveryToClient deliveryToClient=deliveryToClientService.getDeliveryToClientById(deliveryToClientId);
         deliveryToClient.setBoxId(boxId);
-        deliveryToClient.setClientId(clientId);
         deliveryToClient.setCourierId(courierId);
         Date date=Date.valueOf(LocalDate.now());
         deliveryToClient.setDateOfDelivery(date);

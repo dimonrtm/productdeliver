@@ -44,11 +44,7 @@ public class DeliveryToClientService {
         return deliveryToClientList;
     }
 
-    public List<DeliveryToClient> getDeliveryToClientsByClientId(long clientId)
-    {
-        List<DeliveryToClient> deliveryToClientList=deliveryToClientDao.getDeliveryToClientsByClientId(clientId);
-        return deliveryToClientList;
-    }
+
 
     public List<DeliveryToClient> getDeliveryToClientsByCourierId(long courierId)
     {

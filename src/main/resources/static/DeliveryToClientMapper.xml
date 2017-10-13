@@ -7,7 +7,6 @@
     <resultMap type="DeliveryToClient" id="DeliveryToClient">
         <id property="id" column="id"/>
         <result property="boxId" column="box_id"/>
-        <result property="clientId" column="client_id"/>
         <result property="courierId" column="courier_id"/>
         <result property="quantityOfDeliveredToClient" column="quantity_of_delivered_to_client"/>
         <result property="dateOfDelivery" column="date_of_delivery_to_client"/>
@@ -18,7 +17,6 @@
         SELECT
         id,
         box_id ,
-        client_id,
         courier_id ,
         date_of_delivery_to_client,
         time_of_delivery_to_client
@@ -30,7 +28,6 @@
         SELECT
             id,
         box_id ,
-        client_id,
         courier_id ,
         date_of_delivery_to_client,
         time_of_delivery_to_client
@@ -39,23 +36,10 @@
     </select>
     <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
 
-
-    <select id="getDeliveryToClientsByClientId" parameterType="long" resultMap="DeliveryToClient">
-        SELECT
-        box_id ,
-        client_id,
-        courier_id ,
-        date_of_delivery_to_client,
-        time_of_delivery_to_client
-        FROM delivery_to_client
-        WHERE client_id = #{deliveryToClientClientId}
-    </select>
-
     <select id="getDeliveryToClientsByCourierId" parameterType="long" resultMap="DeliveryToClient">
         SELECT
             id,
         box_id ,
-        client_id,
         courier_id ,
         date_of_delivery_to_client,
         time_of_delivery_to_client
@@ -67,7 +51,6 @@
         SELECT
         id,
         box_id ,
-        client_id,
         courier_id ,
         date_of_delivery_to_client,
         time_of_delivery_to_client
@@ -75,15 +58,14 @@
     </select>
 
     <insert id="insertDeliveryToClient" parameterType="DeliveryToClient" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO delivery_to_client ( box_id, client_id,courier_id,date_of_delivery_to_client,time_of_delivery_to_client)
-        VALUES( #{boxId},#{clientId} ,#{courierId},#{dateOfDelivery},#{timeOfDelivery})
+        INSERT INTO delivery_to_client ( box_id,courier_id,date_of_delivery_to_client,time_of_delivery_to_client)
+        VALUES( #{boxId},#{courierId},#{dateOfDelivery},#{timeOfDelivery})
     </insert>
 
     <update id="updateDeliveryToClient" parameterType="DeliveryToClient">
         UPDATE delivery_to_client
         SET
         box_id = #{boxId},
-        client_id = #{clientId},
         courier_id = #{courierId},
         date_of_delivery_to_client=#{dateOfDelivery},
         time_of_delivery_to_client=#{timeOfDelivery}
@@ -96,10 +78,6 @@
 
     <delete id="deleteDeliveryToClientsByBoxId" parameterType="long">
         DELETE FROM delivery_to_client WHERE box_id=#{deliveryToClientBoxId}
-    </delete>
-
-    <delete id="deleteDeliveryToClientsByClientId" parameterType="long">
-        DELETE FROM delivery_to_client WHERE client_id=#{deliveryToClientClientId}
     </delete>
 
     <delete id="deleteDeliveryToClientsByCourierId" parameterType="long">

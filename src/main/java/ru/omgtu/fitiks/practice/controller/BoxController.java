@@ -29,10 +29,10 @@ public class BoxController {
     }
 
     @RequestMapping(value="/box",method= RequestMethod.POST)
-    public String addBox(@RequestParam("name") String name) throws IOException
+    public String addBox(@RequestParam("clientId") long clientId) throws IOException
     {
         Box box=new Box();
-        box.setName(name);
+        box.setClientId(clientId);
         boxService.addBox(box);
        return new ObjectMapper().writeValueAsString(box);
     }

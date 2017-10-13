@@ -16,12 +16,14 @@ public interface BoxMapper {
 
     Box getBoxById(long boxId);
 
-    Box getBoxByName(String name);
+    Box getBoxByClientId(long clientId);
 
     List<Box> getAllBoxs();
 
     void updateBox(Box box);
 
     void deleteBox(long boxId);
+
+    void deleteBoxByClientId(long clientId);
 
 }

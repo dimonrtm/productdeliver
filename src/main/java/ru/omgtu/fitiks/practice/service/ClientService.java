@@ -3,6 +3,7 @@ package ru.omgtu.fitiks.practice.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.omgtu.fitiks.practice.dao.BoxDao;
 import ru.omgtu.fitiks.practice.dao.ClientDao;
 import ru.omgtu.fitiks.practice.dao.DeliveryToClientDao;
 import ru.omgtu.fitiks.practice.model.Client;
@@ -17,14 +18,14 @@ import java.util.List;
 public class ClientService {
 
     private final ClientDao clientDao;
-    private final DeliveryToClientDao deliveryToClientDao;
+    private final BoxDao boxDao;
 
     @Autowired
-    public ClientService(ClientDao clientDao,DeliveryToClientDao deliveryToClientDao)
+    public ClientService(ClientDao clientDao,BoxDao boxDao)
     {
 
         this.clientDao=clientDao;
-        this.deliveryToClientDao=deliveryToClientDao;
+        this.boxDao=boxDao;
     }
 
     public void addClient(Client client)
@@ -49,7 +50,7 @@ public class ClientService {
 
     public void deleteClient(long id)
     {
-        deliveryToClientDao.deleteDeliveryToClientsByClientId(id);
+        boxDao.deleteBoxByClientId(id);
        clientDao.deleteClient(id);
     }
 }

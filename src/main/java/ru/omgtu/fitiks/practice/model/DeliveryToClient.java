@@ -11,8 +11,6 @@ public class DeliveryToClient {
 private long id;
     private long boxId;
 
-    private long clientId;
-
     private long courierId;
 
 
@@ -50,14 +48,6 @@ private long id;
 
     public void setCourierId(long courierId) {
         this.courierId = courierId;
-    }
-
-    public long getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(long clientId) {
-        this.clientId = clientId;
     }
 
     public long getBoxId() {

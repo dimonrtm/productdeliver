@@ -36,11 +36,11 @@ public class BoxDao implements BoxMapper {
     }
 
     @Override
-    public Box getBoxByName(String name) {
+    public Box getBoxByClientId(long clientId) {
         try(SqlSession sqlSession =MyBatisUtil.getSqlSessionFactory().openSession())
         {
             BoxMapper boxMapper=sqlSession.getMapper(BoxMapper.class);
-            Box buff=boxMapper.getBoxByName(name);
+            Box buff=boxMapper.getBoxByClientId(clientId);
             sqlSession.commit();
             return buff;
         }
@@ -75,5 +75,15 @@ public class BoxDao implements BoxMapper {
          boxMapper.deleteBox(boxId);
          sqlSession.commit();
      }
+    }
+
+    @Override
+    public void deleteBoxByClientId(long clientId) {
+        try(SqlSession sqlSession=MyBatisUtil.getSqlSessionFactory().openSession())
+        {
+            BoxMapper boxMapper=sqlSession.getMapper(BoxMapper.class);
+            boxMapper.deleteBoxByClientId(clientId);
+            sqlSession.commit();
+        }
     }
 }
