@@ -20,7 +20,7 @@
             box.b_client_id AS b_client_id,
             products_in_the_box.product_id AS p_id,
             products_in_the_box.quantity_product AS p_quantity_product
-        FROM box LEFT JOIN products_in_the_box ON box.id=products_in_the_box.box_id
+        FROM box INNER JOIN products_in_the_box ON box.id=products_in_the_box.box_id
         WHERE box.id=#{boxId}
     </select>
     <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
@@ -32,7 +32,7 @@
             box.b_client_id AS b_client_id,
             products_in_the_box.product_id AS p_id,
             products_in_the_box.quantity_product AS p_quantity_product
-        FROM box LEFT JOIN  products_in_the_box ON box.id=products_in_the_box.box_id
+        FROM box INNER JOIN  products_in_the_box ON box.id=products_in_the_box.box_id
         WHERE box.b_client_id=#{clientId}
     </select>
 

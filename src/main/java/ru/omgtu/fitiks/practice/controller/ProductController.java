@@ -4,6 +4,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ru.omgtu.fitiks.practice.model.Image;
 import ru.omgtu.fitiks.practice.model.Product;
 import ru.omgtu.fitiks.practice.service.ProductService;
 
@@ -37,15 +38,28 @@ public class ProductController {
     public String productAdd(@RequestParam("name") String name,
             @RequestParam("size") Integer size,
             @RequestParam("weight") Integer weight,
-            @RequestParam("price") Integer price
+            @RequestParam("price") Integer price,
+            @RequestParam("description") String description
     ) throws IOException {
         Product product = new Product();
         product.setName(name);
         product.setSize(size);
         product.setWeight(weight);
         product.setPrice(price);
+        product.setDescription(description);
         productService.addProduct(product);
         return new ObjectMapper().writeValueAsString(product);
+    }
+
+    @RequestMapping(value="/product/{productId}/Image", method=RequestMethod.PUT)
+    public String imageAdd(@PathVariable("productId") long productId,
+                           @RequestParam("imageUrl") String imageUrl)throws IOException
+    {
+        Image image=new Image();
+        image.setProductId(productId);
+        image.setImageUrl(imageUrl);
+        productService.addImage(image);
+        return new ObjectMapper().writeValueAsString(image);
     }
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
@@ -59,12 +73,14 @@ public class ProductController {
                                 @RequestParam("name") String name,
                                 @RequestParam("size") Integer size,
                                 @RequestParam("weight") Integer weight,
-                                @RequestParam("price") Integer price) throws IOException {
+                                @RequestParam("price") Integer price,
+                                @RequestParam("description") String description) throws IOException {
         Product product = productService.getProductById(productId);
         product.setName(name);
         product.setSize(size);
         product.setWeight(weight);
         product.setPrice(price);
+        product.setDescription(description);
         productService.updateProduct(product);
         return new ObjectMapper().writeValueAsString(product);
     }
@@ -74,6 +90,13 @@ public class ProductController {
         productService.deleteProduct(id);
         return new ObjectMapper().writeValueAsString(new Result("success"));
 
+    }
+
+    @RequestMapping(value="/product/{productId}/Image/{imageId} ", method=RequestMethod.DELETE)
+    public String deleteImage(@PathVariable("imageId") long imageId) throws IOException
+    {
+        productService.deleteImageById(imageId);
+        return new ObjectMapper().writeValueAsString(new Result("success"));
     }
 
     class Result {

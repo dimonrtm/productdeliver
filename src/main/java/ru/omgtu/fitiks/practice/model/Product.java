@@ -1,5 +1,7 @@
 package ru.omgtu.fitiks.practice.model;
 
+import java.util.List;
+
 /**
  * Created by dimonrtm on 03.07.2017.
  */
@@ -13,6 +15,10 @@ public class Product {
     private int weight;
 
     private int price;
+
+    private String description;
+
+    private List<Image> images;
 
     public Product()
     {
@@ -60,4 +66,19 @@ public class Product {
     }
 
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }

@@ -5,33 +5,53 @@
 <mapper namespace="ru.omgtu.fitiks.practice.mapper.ProductMapper">
 
     <resultMap type="Product" id="ProductResult">
-        <id property="id" column="id"/>
+        <id property="id" column="p_id"/>
         <result property="name" column="product_name"/>
         <result property="size" column="product_size"/>
         <result property="weight" column="product_weight"/>
         <result property="price" column="product_price"/>
+        <result property="description" column="p_discription"/>
+        <collection property="images" ofType="Image">
+            <id property="id" column="i_id"/>
+            <result property="productId" column="i_product_id"/>
+            <result property="imageUrl" column="image_url"/>
+        </collection>
     </resultMap>
 
     <select id="getProductById" parameterType="long" resultMap="ProductResult">
         SELECT
-        id,
-        product_name,
-        product_size,
-       product_weight,
-        product_price
-        FROM product
+       product.id AS p_id,
+        product.product_name AS product_name,
+        product.product_size AS product_size,
+       product.product_weight AS product_weight,
+        product.product_price AS product_price,
+        product.product_description AS p_description,
+        image.id AS i_id,
+        image.i_product_id AS i_product_id,
+        image.image_url AS image_url
+        FROM product INNER JOIN image ON product.id=image.i_product_id
         WHERE id = #{productId}
     </select>
     <!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
 
 
     <select id="getAllProducts" resultMap="ProductResult">
-        SELECT * FROM product
+        SELECT
+            product.id AS p_id,
+            product.product_name AS product_name,
+            product.product_size AS product_size,
+            product.product_weight AS product_weight,
+            product.product_price AS product_price,
+            product.product_description AS p_description,
+            image.id AS i_id,
+            image.i_product_id AS i_product_id,
+            image.image_url AS image_url
+        FROM product INNER JOIN image ON product.id=image.i_product_id
     </select>
 
     <insert id="insertProduct" parameterType="Product" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO product (product_name, product_size, product_weight, product_price)
-        VALUES(#{name}, #{size},#{weight} ,#{price})
+        INSERT INTO product (product_name, product_size, product_weight, product_price,product_description)
+        VALUES(#{name}, #{size},#{weight} ,#{price},#{description})
     </insert>
 
     <update id="updateProduct" parameterType="Product">
@@ -40,7 +60,8 @@
         product_name = #{name},
         product_price = #{price},
         product_weight = #{weight},
-        product_size = #{size}
+        product_size = #{size},
+        product_description = #{description}
         WHERE id = #{id}
     </update>
 

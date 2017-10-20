@@ -14,6 +14,7 @@
         <typeAlias type="ru.omgtu.fitiks.practice.model.CarForStock" alias="CarForStock"/>
         <typeAlias type="ru.omgtu.fitiks.practice.model.Box" alias="Box"/>
         <typeAlias type="ru.omgtu.fitiks.practice.model.ProductInTheBox" alias="ProductInTheBox"/>
+        <typeAlias type="ru.omgtu.fitiks.practice.model.Image" alias="Image"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
@@ -36,6 +37,7 @@
         <mapper resource="static/CarForStockMapper.xml"/>
         <mapper resource="static/DeliveryToClientMapper.xml"/>
         <mapper resource="static/DeliveryToStockMapper.xml"/>
+        <mapper resource="static/ImageMapper.xml"/>
         <!--
         <mapper resource="DeliveryToStockMapper.xml"/>
 
