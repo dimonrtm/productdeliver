@@ -36,7 +36,8 @@ public class ClientController {
                             @RequestParam("lname") String lname,
                             @RequestParam("adress") String address,
                             @RequestParam("phone") String phone,
-                            @RequestParam("email") String email) throws IOException
+                            @RequestParam("email") String email,
+                            @RequestParam("imageUrl") String imageUrl) throws IOException
     {
         Client client =new Client();
         client.setFname(fname);
@@ -44,6 +45,7 @@ public class ClientController {
         client.setAdress(address);
         client.setPhone(phone);
         client.setEmail(email);
+        client.setImageUrl(imageUrl);
         clientService.addClient(client);
         return new ObjectMapper().writeValueAsString(client);
     }

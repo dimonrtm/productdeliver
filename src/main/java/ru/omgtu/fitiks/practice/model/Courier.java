@@ -17,12 +17,6 @@ public class Courier {
 
     private String phone;
 
-    private String markCar;
-
-    private String modelCar;
-
-    private Date releaseDateCar;
-
     public Courier() {
 
     }
@@ -67,28 +61,4 @@ public class Courier {
         this.phone = phone;
     }
 
-    public String getMarkCar() {
-        return markCar;
-    }
-
-    public void setMarkCar(String markCar) {
-        this.markCar = markCar;
-    }
-
-    public String getModelCar() {
-        return modelCar;
-    }
-
-    public void setModelCar(String modelCar) {
-        this.modelCar = modelCar;
-    }
-
-
-    public Date getReleaseDateCar() {
-        return releaseDateCar;
-    }
-
-    public void setReleaseDateCar(Date releaseDateCar) {
-        this.releaseDateCar = releaseDateCar;
-    }
 }

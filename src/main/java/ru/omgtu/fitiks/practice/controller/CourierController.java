@@ -47,23 +47,6 @@ public class CourierController {
        return new ObjectMapper().writeValueAsString(courier);
     }
 
-    @RequestMapping(value="/courier/{courierId}/carForCourier",method=RequestMethod.PUT)
-    public String addOrUpdateCarForCourier(@PathVariable("courierId") long courierId,
-                                           @RequestParam("mark") String mark,
-                                           @RequestParam("model") String model,
-                                           @RequestParam("year") int year,
-                                           @RequestParam("month") int month,
-                                           @RequestParam("day") int day) throws IOException
-    {
-        Courier courier=courierService.getCourierById(courierId);
-        courier.setMarkCar(mark);
-        courier.setModelCar(model);
-        Date date=Date.valueOf(LocalDate.of(year,month,day));
-        courier.setReleaseDateCar(date);
-        courierService.updateCourier(courier);
-        return new ObjectMapper().writeValueAsString(courier);
-    }
-
     @RequestMapping(value="/couriers",method=RequestMethod.GET)
     public String getAllCouriers() throws IOException
     {

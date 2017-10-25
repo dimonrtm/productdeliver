@@ -8,6 +8,7 @@
         <id property="id" column="id"/>
         <result property="boxId" column="box_id"/>
         <result property="courierId" column="courier_id"/>
+        <result property="carForCourierId" column="car_for_courier_id"/>
         <result property="quantityOfDeliveredToClient" column="quantity_of_delivered_to_client"/>
         <result property="dateOfDelivery" column="date_of_delivery_to_client"/>
         <result property="timeOfDelivery" column="time_of_delivery_to_client"/>
@@ -29,6 +30,7 @@
             id,
         box_id ,
         courier_id ,
+        car_for_courier_id,
         date_of_delivery_to_client,
         time_of_delivery_to_client
         FROM delivery_to_client
@@ -41,6 +43,7 @@
             id,
         box_id ,
         courier_id ,
+        car_for_courier_id
         date_of_delivery_to_client,
         time_of_delivery_to_client
         FROM delivery_to_client
@@ -52,14 +55,15 @@
         id,
         box_id ,
         courier_id ,
+        car_for_courier_id,
         date_of_delivery_to_client,
         time_of_delivery_to_client
         FROM delivery_to_client
     </select>
 
     <insert id="insertDeliveryToClient" parameterType="DeliveryToClient" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO delivery_to_client ( box_id,courier_id,date_of_delivery_to_client,time_of_delivery_to_client)
-        VALUES( #{boxId},#{courierId},#{dateOfDelivery},#{timeOfDelivery})
+        INSERT INTO delivery_to_client ( box_id,courier_id,car_for_courier_id,date_of_delivery_to_client,time_of_delivery_to_client)
+        VALUES( #{boxId},#{courierId},#{carForCourierId},#{dateOfDelivery},#{timeOfDelivery})
     </insert>
 
     <update id="updateDeliveryToClient" parameterType="DeliveryToClient">
@@ -67,6 +71,7 @@
         SET
         box_id = #{boxId},
         courier_id = #{courierId},
+        car_for_courier_id=#{carForCourierId},
         date_of_delivery_to_client=#{dateOfDelivery},
         time_of_delivery_to_client=#{timeOfDelivery}
         WHERE id = #{id}

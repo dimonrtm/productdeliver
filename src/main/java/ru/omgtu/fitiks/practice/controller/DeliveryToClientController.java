@@ -30,11 +30,13 @@ public class DeliveryToClientController {
 
     @RequestMapping(value="/deliveryToClient",method= RequestMethod.POST)
     public String addDeliveryToClient(@RequestParam("boxId") long boxId,
-                                      @RequestParam("courierId") long courierId) throws IOException
+                                      @RequestParam("courierId") long courierId,
+                                      @RequestParam("carForCourierId") long carForCourierId) throws IOException
     {
         DeliveryToClient deliveryToClient=new DeliveryToClient();
         deliveryToClient.setBoxId(boxId);
         deliveryToClient.setCourierId(courierId);
+        deliveryToClient.setCarForCourierId(carForCourierId);
         Date date=Date.valueOf(LocalDate.now());
         deliveryToClient.setDateOfDelivery(date);
         Time time=Time.valueOf(LocalTime.now());
@@ -73,11 +75,13 @@ public class DeliveryToClientController {
     @RequestMapping(value="/deliveryToClient/{deliveryToClientId}",method=RequestMethod.PUT)
     public String updateDeliveryToClient(@PathVariable("deliveryToClientId") long deliveryToClientId,
                                          @RequestParam("boxId") long boxId,
-                                         @RequestParam("courierId") long courierId) throws IOException
+                                         @RequestParam("courierId") long courierId,
+                                         @RequestParam("carForCourierId") long carForCourierId) throws IOException
     {
         DeliveryToClient deliveryToClient=deliveryToClientService.getDeliveryToClientById(deliveryToClientId);
         deliveryToClient.setBoxId(boxId);
         deliveryToClient.setCourierId(courierId);
+        deliveryToClient.setCarForCourierId(carForCourierId);
         Date date=Date.valueOf(LocalDate.now());
         deliveryToClient.setDateOfDelivery(date);
         Time time=Time.valueOf(LocalTime.now());
@@ -87,7 +91,7 @@ public class DeliveryToClientController {
     }
 
     @RequestMapping(value="/deliveryToClient/{deliveryToClientId}",method=RequestMethod.DELETE)
-    public String deleteDeliveryToClient(@PathVariable("deliveryToClient") long id) throws IOException
+    public String deleteDeliveryToClient(@PathVariable("deliveryToClientId") long id) throws IOException
     {
       deliveryToClientService.deleteDeliveryToClient(id);
       return new ObjectMapper().writeValueAsString(new Result("succes"));

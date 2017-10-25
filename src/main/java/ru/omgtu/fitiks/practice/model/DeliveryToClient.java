@@ -13,6 +13,7 @@ private long id;
 
     private long courierId;
 
+    private long carForCourierId;
 
     private Date dateOfDelivery;
 
@@ -64,5 +65,13 @@ private long id;
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getCarForCourierId() {
+        return carForCourierId;
+    }
+
+    public void setCarForCourierId(long carForCourierId) {
+        this.carForCourierId = carForCourierId;
     }
 }

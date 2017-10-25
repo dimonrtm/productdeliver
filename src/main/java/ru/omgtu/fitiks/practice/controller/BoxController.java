@@ -40,12 +40,14 @@ public class BoxController {
     @RequestMapping(value="/box/{boxId}/productsInTheBox",method=RequestMethod.PUT)
     public String addProductInTheBox(@PathVariable("boxId") long boxId,
     @RequestParam("productId") long productId,
+    @RequestParam("stockId") long stockId,
     @RequestParam("quantityProduct") int quantityProduct) throws IOException
     {
        Box box=boxService.getBoxById(boxId);
        ProductInTheBox productInTheBox=new ProductInTheBox();
        productInTheBox.setBoxId(boxId);
        productInTheBox.setProductId(productId);
+       productInTheBox.setStockId(stockId);
        productInTheBox.setQuantityProduct(quantityProduct);
        boxService.addProductInTheBox(productInTheBox);
        return new ObjectMapper().writeValueAsString(productInTheBox);

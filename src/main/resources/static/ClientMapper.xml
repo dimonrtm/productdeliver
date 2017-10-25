@@ -11,7 +11,8 @@
         lname,
         adress,
         phone,
-        email
+        email,
+        client_image_url
         FROM client
         WHERE id = #{clientId}
     </select>
@@ -23,6 +24,7 @@
         <result property="adress" column="adress"/>
         <result property="phone" column="phone"/>
         <result property="email" column="email"/>
+        <result property="imageUrl" column="client_image_url"/>
     </resultMap>
 
     <select id="getAllClients" resultMap="ClientResult">
@@ -30,8 +32,8 @@
     </select>
 
     <insert id="insertClient" parameterType="Client" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO client (fname, lname, adress, phone, email)
-        VALUES(#{fname}, #{lname},#{adress} ,#{phone}, #{email})
+        INSERT INTO client (fname, lname, adress, phone, email,client_image_url)
+        VALUES(#{fname}, #{lname},#{adress} ,#{phone}, #{email},#{imageUrl})
     </insert>
 
     <update id="updateClient" parameterType="Client">
@@ -41,7 +43,8 @@
         lname = #{lname},
         adress = #{adress},
         phone = #{phone},
-        email = #{email}
+        email = #{email},
+        client_image_url=#{imageUrl}
         WHERE id = #{id}
     </update>
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ru.omgtu.fitiks.practice.mapper.CarForCourierMapper">
+
+    <resultMap type="CarForCourier" id="CarForCourierResult">
+        <id property="id" column="id"/>
+        <result property="mark" column="mark_car"/>
+        <result property="model" column="model_car"/>
+        <result property="releaseDate" column="release_date_car"/>
+    </resultMap>
+
+    <select id="getCarForCourierById" parameterType="long" resultMap="CarForCourierResult">
+        SELECT
+            id,
+            mark_car,
+            model_car,
+            release_date_car
+        FROM car_for_courier
+        WHERE car_for_courier.id=#{carForCourierId}
+    </select>
+
+    <select id="getAllCarForCouriers" resultMap="CarForStockResult">
+        SELECT
+            id,
+            mark_car,
+            model_car,
+            release_date_car
+        FROM car_for_courier
+    </select>
+
+    <insert id="insertCarForCourier" parameterType="CarForCourier" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO car_for_courier(mark_car,model_car,release_date_car)
+        VALUES (#{mark},#{model},#{releaseDate})
+    </insert>
+
+    <update id="updateCarForCourier" parameterType="CarForCourier">
+        UPDATE car_for_courier
+        SET
+        mark_car=#{mark},
+        model_car=#{model},
+        release_date_car=#{releaseDate}
+        WHERE id=#{id}
+    </update>
+
+    <delete id="deleteCarForCourier" parameterType="long">
+        DELETE FROM car_for_courier WHERE id=#{carForStockId}
+    </delete>
+
+</mapper>

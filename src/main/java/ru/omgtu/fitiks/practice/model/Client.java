@@ -17,6 +17,8 @@ public class Client {
 
     private String email;
 
+    private String imageUrl;
+
     public Client()
     {
 
@@ -70,4 +72,11 @@ public class Client {
         this.email = email;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }

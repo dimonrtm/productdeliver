@@ -7,7 +7,8 @@
     <select id="getListProductInTheBoxByBoxId" parameterType="long" resultType="ru.omgtu.fitiks.practice.model.ProductInTheBox">
         SELECT
         product_id,
-        box_id
+        box_id,
+        stock_id
         FROM products_in_the_box
         WHERE box_id = #{boxId}
     </select>
@@ -15,12 +16,13 @@
     <resultMap type="ProductInTheBox" id="ProductInTheBoxResult">
         <id property="boxId" column="box_id"/>
         <result property="productId" column="product_id"/>
+        <result property="stockId" column="stock_id"/>
     </resultMap>
 
 
     <insert id="insertProductInTheBox" parameterType="ProductInTheBox"  >
-        INSERT INTO products_in_the_box (product_id, box_id,quantity_product)
-        VALUES(#{productId}, #{boxId},#{quantityProduct})
+        INSERT INTO products_in_the_box (product_id, box_id,stock_id,quantity_product)
+        VALUES(#{productId}, #{boxId},#{stockId},#{quantityProduct})
     </insert>
 
 

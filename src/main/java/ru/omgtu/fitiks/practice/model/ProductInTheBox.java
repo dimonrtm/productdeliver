@@ -9,6 +9,8 @@ public class ProductInTheBox {
 
     private long boxId;
 
+    private long stockId;
+
     private int quantityProduct;
 
     public ProductInTheBox()
@@ -38,5 +40,13 @@ public class ProductInTheBox {
 
     public void setQuantityProduct(int quantityProduct) {
         this.quantityProduct = quantityProduct;
+    }
+
+    public long getStockId() {
+        return stockId;
+    }
+
+    public void setStockId(long stockId) {
+        this.stockId = stockId;
     }
 }

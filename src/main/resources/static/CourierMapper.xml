@@ -10,9 +10,6 @@
         <result property="lname" column="lname_courier"/>
         <result property="dob" column="dob"/>
         <result property="phone" column="phone_courier"/>
-        <result property="markCar" column="mark_car"/>
-        <result property="modelCar" column="model_car"/>
-        <result property="releaseDateCar" column="release_date_car"/>
     </resultMap>
 
     <select id="getCourierById" parameterType="long" resultMap="CourierResult">
@@ -21,10 +18,7 @@
         fname_courier,
         lname_courier,
         dob,
-        phone_courier,
-        mark_car,
-        model_car,
-        release_date_car
+        phone_courier
         FROM courier
         WHERE id = #{courierId}
     </select>
@@ -36,8 +30,8 @@
     </select>
 
     <insert id="insertCourier" parameterType="Courier" useGeneratedKeys="true" keyProperty="id" >
-        INSERT INTO courier (fname_courier, lname_courier, dob, phone_courier,mark_car,model_car,release_date_car)
-        VALUES(#{fname}, #{lname},#{dob} ,#{phone},#{markCar},#{modelCar},#{releaseDateCar})
+        INSERT INTO courier (fname_courier, lname_courier, dob, phone_courier)
+        VALUES(#{fname}, #{lname},#{dob} ,#{phone})
     </insert>
 
     <update id="updateCourier" parameterType="Courier">
@@ -46,10 +40,7 @@
         fname_courier = #{fname},
         lname_courier = #{lname},
         dob = #{dob},
-        phone_courier=#{phone},
-        mark_car=#{markCar},
-        model_car=#{modelCar},
-        release_date_car=#{releaseDateCar}
+        phone_courier=#{phone}
         WHERE id = #{id}
     </update>
 
