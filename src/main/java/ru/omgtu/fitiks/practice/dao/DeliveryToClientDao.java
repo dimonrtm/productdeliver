@@ -57,6 +57,17 @@ public class DeliveryToClientDao implements DeliveryToClientMapper {
     }
 
     @Override
+    public List<DeliveryToClient> getDeliveryToClientByCarForCourierId(long deliveryToClientCarForCourierId) {
+        try(SqlSession sqlSession=MyBatisUtil.getSqlSessionFactory().openSession())
+        {
+            DeliveryToClientMapper deliveryToClientMapper=sqlSession.getMapper(DeliveryToClientMapper.class);
+            List<DeliveryToClient> deliveryToClientList=deliveryToClientMapper.getDeliveryToClientByCarForCourierId(deliveryToClientCarForCourierId);
+            sqlSession.commit();
+            return deliveryToClientList;
+        }
+    }
+
+    @Override
     public List<DeliveryToClient> getAllDeliveryToClients() {
         try(SqlSession sqlSession=MyBatisUtil.getSqlSessionFactory().openSession())
         {
@@ -103,6 +114,16 @@ public class DeliveryToClientDao implements DeliveryToClientMapper {
         {
             DeliveryToClientMapper deliveryToClientMapper=sqlSession.getMapper(DeliveryToClientMapper.class);
             deliveryToClientMapper.deleteDeliveryToClientsByCourierId(deliveryToClientCourierId);
+            sqlSession.commit();
+        }
+    }
+
+    @Override
+    public void deleteDeliveryToClientsByCarForCourierId(long deliveryToClientCarForCourierId) {
+        try(SqlSession sqlSession=MyBatisUtil.getSqlSessionFactory().openSession())
+        {
+            DeliveryToClientMapper deliveryToClientMapper=sqlSession.getMapper(DeliveryToClientMapper.class);
+            deliveryToClientMapper.deleteDeliveryToClientsByCarForCourierId(deliveryToClientCarForCourierId);
             sqlSession.commit();
         }
     }

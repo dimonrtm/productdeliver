@@ -20,6 +20,7 @@ public interface DeliveryToClientMapper {
     List<DeliveryToClient> getDeliveryToClientsByBoxId(long deliveryToClientBoxId);
 
     List<DeliveryToClient> getDeliveryToClientsByCourierId(long deliveryToClientCourierId);
+    List<DeliveryToClient> getDeliveryToClientByCarForCourierId(long deliveryToClientCarForCourierId);
 
     List<DeliveryToClient> getAllDeliveryToClients();
 
@@ -31,4 +32,5 @@ public interface DeliveryToClientMapper {
 
     void deleteDeliveryToClientsByCourierId(long deliveryToClientCourierId);
 
+    void deleteDeliveryToClientsByCarForCourierId(long deliveryToClientCarForCourierId);
 }

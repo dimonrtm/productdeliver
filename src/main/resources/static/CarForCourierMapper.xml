@@ -20,7 +20,7 @@
         WHERE car_for_courier.id=#{carForCourierId}
     </select>
 
-    <select id="getAllCarForCouriers" resultMap="CarForStockResult">
+    <select id="getAllCarForCouriers" resultMap="CarForCourierResult">
         SELECT
             id,
             mark_car,

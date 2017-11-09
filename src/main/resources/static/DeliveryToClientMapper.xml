@@ -43,11 +43,23 @@
             id,
         box_id ,
         courier_id ,
-        car_for_courier_id
+        car_for_courier_id,
         date_of_delivery_to_client,
         time_of_delivery_to_client
         FROM delivery_to_client
         WHERE courier_id = #{deliveryToClientCourierId}
+    </select>
+
+    <select id="getDeliveryToClientByCarForCourierId" parameterType="long" resultMap="DeliveryToClient">
+        SELECT
+            id,
+            box_id,
+            courier_id,
+            car_for_courier_id,
+            date_of_delivery_to_client,
+            time_of_delivery_to_client
+         FROM delivery_to_client
+        WHERE car_for_courier_id=#{deliveryToClientCarForCourierId}
     </select>
 
     <select id="getAllDeliveryToClients"  resultMap="DeliveryToClient">
@@ -87,6 +99,10 @@
 
     <delete id="deleteDeliveryToClientsByCourierId" parameterType="long">
         DELETE FROM delivery_to_client WHERE courier_id=#{deliveryToClientCourierId}
+    </delete>
+
+    <delete id="deleteDeliveryToClientsByCarForCourierId" parameterType="long">
+        DELETE FROM delivery_to_client WHERE courier_id=#{deliveryToClientCarForCourierId}
     </delete>
 
 </mapper>

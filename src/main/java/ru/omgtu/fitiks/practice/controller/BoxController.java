@@ -84,8 +84,8 @@ public class BoxController {
   }*/
 
   @RequestMapping(value="/box/{boxId}")
-    public String deleteBox(@PathVariable("boxId") long boxId) throws IOException
-  {
+      public String deleteBox(@PathVariable("boxId") long boxId) throws IOException
+      {
       boxService.deleteBox(boxId);
       return new ObjectMapper().writeValueAsString(new Result("succes"));
   }
